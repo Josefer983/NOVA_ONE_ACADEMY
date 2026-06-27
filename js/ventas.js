@@ -67,7 +67,7 @@ render() {
                     🖨 Comanda
                 </button>
 
-                <button class="btn btn-cobrar">
+                <button class="btn btn-cobrar" onclick="Ventas.abrirCobro()">
                     💳 Cobrar
                 </button>
 
@@ -115,6 +115,16 @@ vaciar(){
     this.ticket = [];
 
     this.actualizar();
+},
+
+  abrirCobro(){
+
+    const total = this.ticket.reduce(
+        (s,p)=>s+(p.precio*p.cantidad),0
+    );
+
+    alert("Total a cobrar: $" + total.toFixed(2));
+
 },
 
     actualizar(){
