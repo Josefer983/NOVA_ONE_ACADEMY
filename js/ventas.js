@@ -55,6 +55,33 @@ render() {
 
                 <div id="ticket"></div>
 
+                <hr>
+
+                <h2 id="total">$0.00</h2>
+
+                <button class="btn btn-vaciar" onclick="Ventas.vaciar()">
+                    🗑 Vaciar Ticket
+                </button>
+
+                <button class="btn btn-comanda">
+                    🖨 Comanda
+                </button>
+
+                <button class="btn btn-cobrar">
+                    💳 Cobrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    `;
+
+    this.actualizar();
+
+},
+
 agregar(nombre, precio){
 
     const existe = this.ticket.find(p => p.nombre === nombre);
@@ -86,32 +113,8 @@ eliminar(i){
 vaciar(){
 
     this.ticket = [];
-   
-                <hr>
-
-                <h2 id="total">$0.00</h2>
-
-                <button class="btn btn-vaciar" onclick="Ventas.vaciar()">
-                    🗑 Vaciar Ticket
-                </button>
-
-                <button class="btn btn-comanda">
-                    🖨 Comanda
-                </button>
-
-                <button class="btn btn-cobrar">
-                    💳 Cobrar
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-    `;
 
     this.actualizar();
-
 },
 
     actualizar(){
