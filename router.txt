@@ -16,7 +16,7 @@ const App = {
 
                     <div class="card">
                         <h3>Productos</h3>
-                        <h2>${JSON.parse(localStorage.getItem("productos")||"[]").length}</h2>
+                        <h2>${Productos ? Productos.lista.length : JSON.parse(localStorage.getItem("productos")||"[]").length}</h2>
                     </div>
 
                     <div class="card">
@@ -38,23 +38,70 @@ const App = {
             break;
 
             case "productos":
-
-                titulo.textContent="Productos";
-
-                contenido.innerHTML=`
-                    <h2>Módulo de Productos</h2>
-                    <br>
-                    <button id="nuevoProducto">➕ Nuevo producto</button>
-                    <br><br>
-                    <div id="listaProductos"></div>
-                `;
+                Productos.render();
             break;
 
             case "ventas":
-            Ventas.render();
-            break;
 
-            case "clientes":
+    titulo.textContent="Ventas";
+
+    contenido.innerHTML=`
+<div class="card">
+
+<div style="display:flex;gap:10px;overflow:auto;margin-bottom:15px;">
+<button class="btn">☕ Cafés</button>
+<button class="btn">🥤 Frías</button>
+<button class="btn">🥐 Pan</button>
+<button class="btn">🍰 Postres</button>
+</div>
+
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;">
+
+<div>
+
+<h3>Productos</h3>
+
+<div class="card-grid">
+
+<div class="card">☕ Latte<br>$65</div>
+<div class="card">☕ Americano<br>$45</div>
+<div class="card">🥤 Frappé<br>$85</div>
+<div class="card">🍰 Cheesecake<br>$70</div>
+
+</div>
+
+</div>
+
+<div>
+
+<h3>Ticket</h3>
+
+<div class="card">
+
+<p>No hay productos.</p>
+
+<hr>
+
+<h2>$0.00</h2>
+
+<button class="btn">🖨️ Comanda</button>
+
+<br><br>
+
+<button class="btn">💳 Cobrar</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+break;
+
+case "clientes":
                 titulo.textContent="Clientes";
                 contenido.innerHTML="<h2>🚧 Próximamente...</h2>";
             break;

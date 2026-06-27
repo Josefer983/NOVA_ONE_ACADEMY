@@ -1,152 +1,282 @@
-let productos = JSON.parse(localStorage.getItem("productos")) || [];
+window.Productos = {
 
-const tabla = document.querySelector("#tablaProductos tbody");
+    lista: JSON.parse(localStorage.getItem("productos") || "[]"),
 
-const modal = document.getElementById("modalProducto");
-const btnNuevo = document.getElementById("nuevoProducto");
-const btnCerrar = document.getElementById("cerrarModal");
-const btnCancelar = document.getElementById("cancelarProducto");
-const btnGuardar = document.getElementById("guardarProducto");
+    editando: -1,
 
-const txtNombre = document.getElementById("nombreProducto");
-const txtStock = document.getElementById("stockProducto");
-const txtPrecio = document.getElementById("precioProducto");
+    guardar() {
+        localStorage.setItem("productos", JSON.stringify(this.lista));
+    },
 
-let indiceEditar = null;
+    render() {
 
-function guardarLocal() {
-    localStorage.setItem("productos", JSON.stringify(productos));
-}
+        document.getElementById("titulo").textContent = "Productos";
 
-function abrirModal() {
-    modal.classList.add("active");
-}
+        document.getElementById("contenido").innerHTML = `
 
-function cerrarModal() {
-    modal.classList.remove("active");
-    txtNombre.value = "";
-    txtStock.value = "";
-    txtPrecio.value = "";
-    indiceEditar = null;
-}
+<div class="toolbar">
 
-btnNuevo.onclick = abrirModal;
-btnCerrar.onclick = cerrarModal;
-btnCancelar.onclick = cerrarModal;
+    <button id="btnNuevo">
+        ➕ Nuevo producto
+    </button>
 
-btnGuardar.onclick = () => {
+    <input
+        id="buscar"
+        type="text"
+        placeholder="🔍 Buscar producto..."
+    >
 
-    const nombre = txtNombre.value.trim();
-    const stock = Number(txtStock.value);
-    const precio = Number(txtPrecio.value);
+</div>
 
-    if (!nombre) {
-        alert("Escribe el nombre del producto.");
-        return;
+<table class="tabla">
+
+<thead>
+
+<tr>
+
+<th>SKU</th>
+<th>Nombre</th>
+
+<th>Stock</th>
+
+<th>Precio</th>
+
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tablaProductos">
+
+</tbody>
+
+</table>
+
+<div id="modalProducto" class="modal">
+
+<div class="modal-content">
+
+<h2 id="tituloModal">
+Nuevo Producto
+</h2>
+
+<input
+id="nombre"
+placeholder="Nombre">
+
+<input
+id="stock"
+type="number"
+placeholder="Stock">
+
+<input
+id="precio"
+type="number"
+placeholder="Precio">
+
+<div class="modal-actions">
+
+<button id="btnCancelar">
+Cancelar
+</button>
+
+<button id="btnGuardar">
+Guardar
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+        this.actualizarTabla();
+
+        document
+            .getElementById("btnNuevo")
+            .onclick = () => {
+
+                this.editando = -1;
+
+                document
+                    .getElementById("tituloModal")
+                    .textContent = "Nuevo Producto";
+
+                document
+                    .getElementById("nombre")
+                    .value = "";
+
+                document
+                    .getElementById("stock")
+                    .value = "";
+
+                document
+                    .getElementById("precio")
+                    .value = "";
+
+                document
+                    .getElementById("modalProducto")
+                    .classList
+                    .add("active");
+
+            };
+
+        document
+            .getElementById("btnCancelar")
+            .onclick = () => {
+
+                document
+                    .getElementById("modalProducto")
+                    .classList
+                    .remove("active");
+
+            };
+
+        document
+            .getElementById("btnGuardar")
+            .onclick = () => {
+
+                const producto = {
+
+                    id: Date.now(),
+
+                sku: "NOV-" + String(this.lista.length + 1).padStart(4,"0"),
+
+                    nombre:
+                        document.getElementById("nombre").value,
+
+                    stock:
+                        Number(document.getElementById("stock").value),
+
+                    precio:
+                        Number(document.getElementById("precio").value)
+
+                };
+
+                if (this.editando === -1) {
+
+                    this.lista.push(producto);
+
+                } else {
+
+                    producto.id =
+                        this.lista[this.editando].id;
+
+                    this.lista[this.editando] =
+                        producto;
+
+                }
+
+                this.guardar();
+
+                document
+                    .getElementById("modalProducto")
+                    .classList
+                    .remove("active");
+
+                this.render();
+
+            };
+document
+            .getElementById("buscar")
+            .addEventListener("input", (e) => {
+
+                this.actualizarTabla(e.target.value);
+
+            });
+
+    },
+
+    actualizarTabla(filtro = "") {
+
+        const tbody = document.getElementById("tablaProductos");
+
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+
+        this.lista
+            .filter(producto =>
+                producto.nombre
+                    .toLowerCase()
+                    .includes(filtro.toLowerCase())
+            )
+            .forEach((producto, index) => {
+
+                tbody.innerHTML += `
+
+<tr>
+
+<td>${producto.sku}</td>
+<td>${producto.nombre}</td>
+
+<td>${producto.stock}</td>
+
+<td>$${producto.precio.toFixed(2)}</td>
+
+<td>
+
+<button onclick="Productos.editar(${index})">
+✏️
+</button>
+
+<button onclick="Productos.eliminar(${index})">
+🗑️
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+            });
+
+    },
+
+    editar(index) {
+
+        this.editando = index;
+
+        const producto = this.lista[index];
+
+        document.getElementById("tituloModal").textContent =
+            "Editar Producto";
+
+        document.getElementById("nombre").value =
+            producto.nombre;
+
+        document.getElementById("stock").value =
+            producto.stock;
+
+        document.getElementById("precio").value =
+            producto.precio;
+
+        document
+            .getElementById("modalProducto")
+            .classList
+            .add("active");
+
+    },
+
+    eliminar(index) {
+
+        if (!confirm("¿Eliminar este producto?")) {
+
+            return;
+
+        }
+
+        this.lista.splice(index, 1);
+
+        this.guardar();
+
+        this.actualizarTabla();
+
     }
-
-    if (indiceEditar === null) {
-
-        productos.push({
-            id: Date.now(),
-            nombre,
-            stock,
-            precio
-        });
-
-    } else {
-
-        productos[indiceEditar].nombre = nombre;
-        productos[indiceEditar].stock = stock;
-        productos[indiceEditar].precio = precio;
-
-    }
-
-    guardarLocal();
-    renderizar();
-    cerrarModal();
-
 };
 
-function editar(index){
-
-    indiceEditar = index;
-
-    txtNombre.value = productos[index].nombre;
-    txtStock.value = productos[index].stock;
-    txtPrecio.value = productos[index].precio;
-
-    abrirModal();
-
-}
-
-function eliminar(index){
-
-    if(!confirm("¿Eliminar producto?")) return;
-
-    productos.splice(index,1);
-
-    guardarLocal();
-
-    renderizar();
-
-}
-
-function renderizar(){
-
-    tabla.innerHTML="";
-
-    productos.forEach((producto,index)=>{
-
-        tabla.innerHTML += `
-        <tr>
-
-            <td>${producto.id}</td>
-
-            <td>${producto.nombre}</td>
-
-            <td>${producto.stock}</td>
-
-            <td>$${producto.precio.toFixed(2)}</td>
-
-            <td>
-
-                <button onclick="editar(${index})">✏️</button>
-
-                <button onclick="eliminar(${index})">🗑️</button>
-
-            </td>
-
-        </tr>
-        `;
-
-    });
-
-}
-
-renderizar();
-
-const buscador = document.getElementById("buscarProducto");
-
-if (buscador) {
-
-    buscador.addEventListener("input", () => {
-
-        const texto = buscador.value.toLowerCase();
-
-        const filas = tabla.querySelectorAll("tr");
-
-        filas.forEach(fila => {
-
-            const nombre = fila.children[1].textContent.toLowerCase();
-
-            fila.style.display = nombre.includes(texto)
-                ? ""
-                : "none";
-
-        });
-
-    });
-
-}
-
+window.Productos = Productos;
