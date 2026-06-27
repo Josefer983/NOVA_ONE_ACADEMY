@@ -55,171 +55,69 @@ render() {
 
                 <div id="ticket"></div>
 
-                <hr>
+agregar(nombre, precio){
 
-                <h2 id="total">$0.00</h2>
+    const existe = this.ticket.find(p => p.nombre === nombre);
 
-                <button class="btn btn-vaciar" onclick="Ventas.vaciar()">
-                    🗑 Vaciar Ticket
-                </button>
-
-                <button class="btn btn-comanda">
-                    🖨 Comanda
-                </button>
-
-                <button class="btn btn-cobrar">
-                    💳 Cobrar
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-    `;
-
-    this.actualizar();
-
-},
-
-    actualizar(){
-
-        const Ventas = {
-
-    ticket: [],
-
-render() {
-
-    
-    const titulo = document.getElementById("titulo");
-    const contenido = document.getElementById("contenido");
-
-    titulo.textContent = "Caja";
-
-    const productos = JSON.parse(localStorage.getItem("productos") || "[]");
-
-    contenido.innerHTML = `
-    <div class="card">
-
-        <div style="display:grid;grid-template-columns:3fr 1fr;gap:25px;align-items:flex-start;">
-
-            <!-- PRODUCTOS -->
-            <div>
-
-                <div class="productos-grid">
-
-                    ${
-                        productos.length === 0
-                        ? "<p>No hay productos registrados.</p>"
-                        : productos.map(p => `
-                            <div class="producto-card">
-
-                                <div class="producto-icono">📦</div>
-
-                                <h3>${p.nombre}</h3>
-
-                                <p>$${p.precio}</p>
-
-                                <button
-                                    class="btn-agregar"
-                                    onclick="Ventas.agregar('${p.nombre}', ${p.precio})">
-                                    Agregar
-                                </button>
-
-                            </div>
-                        `).join("")
-                    }
-
-                </div>
-
-            </div>
-
-            <!-- TICKET -->
-            <div class="card">
-
-                <h3>🧾 Ticket</h3>
-
-                <div id="ticket"></div>
-
-                <hr>
-
-                <h2 id="total">$0.00</h2>
-
-                <button class="btn btn-vaciar" onclick="Ventas.vaciar()">
-                    🗑 Vaciar Ticket
-                </button>
-
-                <button class="btn btn-comanda">
-                    🖨 Comanda
-                </button>
-
-                <button class="btn btn-cobrar">
-                    💳 Cobrar
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-    `;
-
-    this.actualizar();
-
-},
-
-    actualizar(){
-
-        const lista=document.getElementById("ticket");
-
-        if(!lista)return;
-
-        let html="";
-
-        let total=0;
-
-        this.ticket.forEach((p,i)=>{
-
-            let subtotal=p.precio*p.cantidad;
-
-            total+=subtotal;
-
-           html += `
-<div class="ticket-item">
-
-    <div class="ticket-info">
-        <strong>${p.nombre}</strong><br>
-        <small>${p.cantidad} × $${p.precio}</small>
-    </div>
-
-    <div class="ticket-total">
-        <b>$${subtotal}</b>
-    </div>
-
-    <button class="btn-eliminar"
-        onclick="Ventas.eliminar(${i})">
-        ✕
-    </button>
-
-</div>
-`;
-
+    if(existe){
+        existe.cantidad++;
+    }else{
+        this.ticket.push({
+            nombre,
+            precio,
+            cantidad:1
         });
-
-        if(html===""){
-
-            html="<p>No hay productos.</p>";
-
-        }
-
-        lista.innerHTML=html;
-
-        document.getElementById("total").textContent="$"+total.toFixed(2);
-
     }
 
-};
+    this.actualizar();
+},
 
+eliminar(i){
+
+    if(this.ticket[i].cantidad > 1){
+        this.ticket[i].cantidad--;
+    }else{
+        this.ticket.splice(i,1);
+    }
+
+    this.actualizar();
+},
+
+vaciar(){
+
+    this.ticket = [];
+
+    this.actualizar();
+},
+                
+                <hr>
+
+                <h2 id="total">$0.00</h2>
+
+                <button class="btn btn-vaciar" onclick="Ventas.vaciar()">
+                    🗑 Vaciar Ticket
+                </button>
+
+                <button class="btn btn-comanda">
+                    🖨 Comanda
+                </button>
+
+                <button class="btn btn-cobrar">
+                    💳 Cobrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    `;
+
+    this.actualizar();
+
+},
+
+    actualizar(){
 
         const lista=document.getElementById("ticket");
 
