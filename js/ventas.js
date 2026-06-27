@@ -59,19 +59,19 @@ Agregar
 
                     <h2 id="total">$0.00</h2>
 
-                    <button class="btn" onclick="Ventas.vaciar()">
+                    <button class="btn-btn-vaciar" onclick="Ventas.vaciar()">
                     🗑 Vaciar Ticket
                     </button>
 
                     <br><br>
 
-                    <button class="btn">
+                    <button class="btn-btn-comanda">
                     🖨 Comanda
                     </button>
 
                     <br><br>
 
-                    <button class="btn">
+                    <button class="btn-btn-cobrar">
                     💳 Cobrar
                     </button>
 
