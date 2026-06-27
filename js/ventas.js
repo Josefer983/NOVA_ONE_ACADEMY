@@ -41,8 +41,9 @@ Agregar
 `).join("");
 
                                                                                     })()}
-            
-            </div>
+                                                                                     </div>
+                                                                                     ';
+
 
             <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;">
 
@@ -146,17 +147,25 @@ vaciar(){
 
             total+=subtotal;
 
-            html+=`
-            <p>
+           html += `
+<div class="ticket-item">
 
-            ${p.nombre}
+    <div class="ticket-info">
+        <strong>${p.nombre}</strong><br>
+        <small>${p.cantidad} × $${p.precio}</small>
+    </div>
 
-            x${p.cantidad}
+    <div class="ticket-total">
+        <b>$${subtotal}</b>
+    </div>
 
-            <b>$${subtotal}</b> <button onclick='Ventas.eliminar(${i})'>❌</button>
+    <button class="btn-eliminar"
+        onclick="Ventas.eliminar(${i})">
+        ✕
+    </button>
 
-            </p>
-            `;
+</div>
+`;
 
         });
 
