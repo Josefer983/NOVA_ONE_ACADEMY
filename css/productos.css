@@ -54,3 +54,11 @@
     flex-wrap:wrap;
     gap:20px;
 }
+
+.productos-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    justify-content:flex-start;
+    align-items:flex-start;
+}
