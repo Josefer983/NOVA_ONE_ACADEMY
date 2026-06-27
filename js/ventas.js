@@ -2,136 +2,84 @@ const Ventas = {
 
     ticket: [],
 
-    render() {
+   render() {
 
-        const titulo = document.getElementById("titulo");
-        const contenido = document.getElementById("contenido");
+    const titulo = document.getElementById("titulo");
+    const contenido = document.getElementById("contenido");
 
-        titulo.textContent = "Caja";
+    titulo.textContent = "Caja";
 
-        contenido.innerHTML = `
-        <div class="card">
+    const productos = JSON.parse(localStorage.getItem("productos") || "[]");
 
-            <div style="display:flex;gap:10px;overflow:auto;margin-bottom:20px;">
-            ${(() => {
+    contenido.innerHTML = `
+    <div class="card">
 
-                    const productos = JSON.parse(localStorage.getItem("productos") || "[]");
+        <div style="display:grid;grid-template-columns:3fr 1fr;gap:25px;align-items:flex-start;">
 
-                        if (productos.length === 0) {
-                                return "<p>No hay productos registrados.</p>";
-                                    }
+            <!-- PRODUCTOS -->
+            <div>
 
-                                
-                                                return productos.map(p => `
-<div class="producto-card">
+                <div class="productos-grid">
 
-<div class="producto-icono">📦</div>
+                    ${
+                        productos.length === 0
+                        ? "<p>No hay productos registrados.</p>"
+                        : productos.map(p => `
+                            <div class="producto-card">
 
-<h3>${p.nombre}</h3>
+                                <div class="producto-icono">📦</div>
 
-<p>$${p.precio}</p>
+                                <h3>${p.nombre}</h3>
 
-<button
-class="btn-agregar"
-onclick="Ventas.agregar('${p.nombre}',${p.precio})">
-Agregar
-</button>
+                                <p>$${p.precio}</p>
 
-</div>
-`).join("");
+                                <button
+                                    class="btn-agregar"
+                                    onclick="Ventas.agregar('${p.nombre}', ${p.precio})">
+                                    Agregar
+                                </button>
 
-                                                                                    })()}
-                                                                                     </div>
-                                                                                     ';
-
-
-            <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;">
-
-                <div></div>
-
-                <div class="card">
-
-                    <h3>🧾 Ticket</h3>
-
-                    <div id="ticket"></div>
-
-                    <hr>
-
-                    <h2 id="total">$0.00</h2>
-
-                    <button class="btn btn-vaciar" onclick="Ventas.vaciar()">
-                    🗑 Vaciar Ticket
-                    </button>
-
-                    <br><br>
-
-                    <button class="btn btn-comanda">
-                    🖨 Comanda
-                    </button>
-
-                    <br><br>
-
-                    <button class="btn btn-cobrar">
-                    💳 Cobrar
-                    </button>
+                            </div>
+                        `).join("")
+                    }
 
                 </div>
 
             </div>
 
+            <!-- TICKET -->
+            <div class="card">
+
+                <h3>🧾 Ticket</h3>
+
+                <div id="ticket"></div>
+
+                <hr>
+
+                <h2 id="total">$0.00</h2>
+
+                <button class="btn btn-vaciar" onclick="Ventas.vaciar()">
+                    🗑 Vaciar Ticket
+                </button>
+
+                <button class="btn btn-comanda">
+                    🖨 Comanda
+                </button>
+
+                <button class="btn btn-cobrar">
+                    💳 Cobrar
+                </button>
+
+            </div>
+
         </div>
-        `;
 
-        this.actualizar();
+    </div>
+    `;
 
-    },
+    this.actualizar();
 
-    agregar(nombre,precio){
-
-        let existe=this.ticket.find(p=>p.nombre===nombre);
-
-        if(existe){
-
-            existe.cantidad++;
-
-        }else{
-
-            this.ticket.push({
-
-                nombre,
-
-                precio,
-
-                cantidad:1
-
-            });
-
-        }
-
-        this.actualizar();
-    },
-
-
-  eliminar(i){
-        if(this.ticket[i].cantidad > 1){
-                this.ticket[i].cantidad--;
-                    }else{
-                            this.ticket.splice(i,1);
-                                }
-
-                                    this.actualizar();
-                                    },
-
-
-vaciar(){
-
-        this.ticket=[];
-
-        this.actualizar();
-
-    },
-
-    actualizar(){
+},
 
         const lista=document.getElementById("ticket");
 
