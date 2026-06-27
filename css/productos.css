@@ -49,9 +49,83 @@
     background:#1d4ed8;
 }
 
+
 .productos-grid{
     display:flex;
     flex-wrap:wrap;
-    gap:20px;
+    gap:25px;
+    justify-content:flex-start;
+    align-items:flex-start;
 }
 
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+#btnNuevo{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#buscar{
+    padding:12px 15px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    min-width:260px;
+}
+
+.tabla{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.tabla thead{
+    background:#2563eb;
+    color:white;
+}
+
+.tabla th,
+.tabla td{
+    padding:14px;
+    text-align:left;
+}
+
+.tabla tbody tr{
+    border-bottom:1px solid #eee;
+}
+
+.tabla tbody tr:hover{
+    background:#f8fafc;
+}
+
+.tabla button{
+    border:none;
+    border-radius:8px;
+    padding:8px 10px;
+    cursor:pointer;
+    margin-right:6px;
+}
+
+.tabla button:first-child{
+    background:#3b82f6;
+    color:white;
+}
+
+.tabla button:last-child{
+    background:#ef4444;
+    color:white;
+}
