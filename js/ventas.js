@@ -2,7 +2,7 @@ const Ventas = {
 
     ticket: [],
 
-   render() {
+render() {
 
     const titulo = document.getElementById("titulo");
     const contenido = document.getElementById("contenido");
@@ -80,6 +80,8 @@ const Ventas = {
     this.actualizar();
 
 },
+
+    actualizar(){
 
         const lista=document.getElementById("ticket");
 
