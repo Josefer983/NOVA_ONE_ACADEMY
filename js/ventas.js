@@ -21,12 +21,24 @@ const Ventas = {
                                 return "<p>No hay productos registrados.</p>";
                                     }
 
-                                        return productos.map(p => `
-                                                <button class="btn"
-                                                            onclick="Ventas.agregar('${p.nombre}', ${p.precio})">
-                                                                        ${p.nombre}<br>$${p.precio}
-                                                                                </button>
-                                                                                    `).join("");
+                                
+                                                return productos.map(p => `
+<div class="producto-card">
+
+<div class="producto-icono">📦</div>
+
+<h3>${p.nombre}</h3>
+
+<p>$${p.precio}</p>
+
+<button
+class="btn-agregar"
+onclick="Ventas.agregar('${p.nombre}',${p.precio})">
+Agregar
+</button>
+
+</div>
+`).join("");
 
                                                                                     })()}
             
