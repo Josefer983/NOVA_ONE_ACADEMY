@@ -203,11 +203,64 @@ calcularCambio(){
 
 confirmarCobro(){
 
-    alert("Venta realizada correctamente.");
+    if(this.ticket.length===0){
+        alert("No hay productos en el ticket.");
+        return;
+    }
+
+    const metodo=document.getElementById("metodoPago").value;
+
+    const ventas=JSON.parse(localStorage.getItem("ventas")||"[]");
+
+    const venta={
+
+        folio:ventas.length+1,
+
+        fecha:new Date().toLocaleString(),
+
+        metodo:metodo,
+
+        total:this.totalCobro,
+
+        productos:[...this.ticket]
+
+    };
+
+    ventas.push(venta);
+
+    localStorage.setItem("ventas",JSON.stringify(ventas));
+
+    this.descontarInventario();
 
     this.vaciar();
 
     this.cerrarCobro();
+
+    alert("✅ Venta realizada correctamente.");
+
+},
+
+descontarInventario(){
+
+    let productos=JSON.parse(localStorage.getItem("productos")||"[]");
+
+    this.ticket.forEach(item=>{
+
+        const producto=productos.find(p=>p.nombre===item.nombre);
+
+        if(producto){
+
+            producto.stock-=item.cantidad;
+
+            if(producto.stock<0){
+                producto.stock=0;
+            }
+
+        }
+
+    });
+
+    localStorage.setItem("productos",JSON.stringify(productos));
 
 },
 
