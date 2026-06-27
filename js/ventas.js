@@ -70,6 +70,52 @@ render() {
                 <button class="btn btn-cobrar" onclick="Ventas.abrirCobro()">
                     💳 Cobrar
                 </button>
+<div id="modalCobro" class="modal">
+
+    <div class="modal-contenido">
+
+        <h2>💳 Cobrar Venta</h2>
+
+        <h3 id="modalTotal">$0.00</h3>
+
+        <label>Método de pago</label>
+
+        <select id="metodoPago">
+            <option>Efectivo</option>
+            <option>Tarjeta</option>
+            <option>Transferencia</option>
+        </select>
+
+        <label>Recibido</label>
+
+        <input
+            type="number"
+            id="recibido"
+            placeholder="0.00"
+            oninput="Ventas.calcularCambio()">
+
+        <h3>
+            Cambio:
+            <span id="cambio">$0.00</span>
+        </h3>
+
+        <div class="acciones-modal">
+
+            <button class="btn btn-vaciar"
+                onclick="Ventas.cerrarCobro()">
+                Cancelar
+            </button>
+
+            <button class="btn btn-cobrar"
+                onclick="Ventas.confirmarCobro()">
+                Confirmar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
             </div>
 
@@ -120,10 +166,48 @@ vaciar(){
   abrirCobro(){
 
     const total = this.ticket.reduce(
-        (s,p)=>s+(p.precio*p.cantidad),0
+        (s,p)=>s+(p.precio*p.cantidad),
+        0
     );
 
-    alert("Total a cobrar: $" + total.toFixed(2));
+    this.totalCobro = total;
+
+    document.getElementById("modalTotal").textContent =
+        "$" + total.toFixed(2);
+
+    document.getElementById("recibido").value = "";
+
+    document.getElementById("cambio").textContent = "$0.00";
+
+    document.getElementById("modalCobro").style.display = "flex";
+
+},
+
+cerrarCobro(){
+
+    document.getElementById("modalCobro").style.display = "none";
+
+},
+
+calcularCambio(){
+
+    const recibido =
+        Number(document.getElementById("recibido").value);
+
+    const cambio = recibido - this.totalCobro;
+
+    document.getElementById("cambio").textContent =
+        "$" + Math.max(cambio,0).toFixed(2);
+
+},
+
+confirmarCobro(){
+
+    alert("Venta realizada correctamente.");
+
+    this.vaciar();
+
+    this.cerrarCobro();
 
 },
 
