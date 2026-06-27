@@ -86,10 +86,7 @@ eliminar(i){
 vaciar(){
 
     this.ticket = [];
-
-    this.actualizar();
-},
-                
+   
                 <hr>
 
                 <h2 id="total">$0.00</h2>
