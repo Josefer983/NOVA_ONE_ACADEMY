@@ -98,4 +98,30 @@ header{
     width:100%;
 }
 
-}
+/* ===========================
+   LOGO SIDEBAR
+   =========================== */
+
+   .logo-sidebar{
+
+       display:flex;
+
+           justify-content:center;
+
+               align-items:center;
+
+                   padding:20px 15px;
+
+                   }
+
+                   .logo-sidebar img{
+
+                       width:100%;
+
+                           max-width:190px;
+
+                               height:auto;
+
+                                   object-fit:contain;
+
+                                   }
