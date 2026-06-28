@@ -5,6 +5,22 @@ const Ticket = {
     // Si no recibe una venta, usa la última abierta en el historial
     venta = venta || window.ventaActual;
 
+const config = JSON.parse(
+    localStorage.getItem("configuracion") || "{}"
+);
+
+const nombre = config.nombre || "NOVA POS";
+
+const rfc = config.rfc || "";
+
+const telefono = config.telefono || "";
+
+const direccion = config.direccion || "";
+
+const mensaje = config.mensaje || "¡Gracias por su compra!";
+
+const papel = config.papel || "58";
+
     if(!venta){
         alert("No se encontró la venta.");
         return;
@@ -42,8 +58,11 @@ const Ticket = {
 <style>
 
 @page{
-    size: 58mm 100mm;
-    margin: 0;
+
+    size:${papel}mm auto;
+
+    margin:0;
+
 }
 
 *{
@@ -124,15 +143,15 @@ td{
 
 <body>
 
-<h2>NOVA POS</h2>
+<h2>${nombre}</h2>
 
 <div class="centro">
 
-Mi Negocio
+${rfc ? `RFC: ${rfc}<br>` : ""}
 
-<br>
+${telefono ? `Tel: ${telefono}<br>` : ""}
 
-Gracias por su compra
+${direccion ? `${direccion}<br>` : ""}
 
 </div>
 
@@ -176,7 +195,7 @@ ${venta.metodo}
 
 <div class="footer">
 
-¡Gracias por su compra!
+${mensaje}
 
 <br>
 
