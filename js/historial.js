@@ -59,17 +59,25 @@ const Historial = {
 
                                 <td>$${Number(venta.total).toFixed(2)}</td>
 
-                                <td>
+                                <td style="display:flex;gap:8px;">
 
-                                    <button
-                                        class="btn btn-cobrar"
-                                        onclick="Historial.ver(${index})">
+    <button
+        class="btn btn-cobrar"
+        onclick="Historial.ver(${index})">
 
-                                        👁 Ver
+        👁 Ver
 
-                                    </button>
+    </button>
 
-                                </td>
+    <button
+        class="btn btn-vaciar"
+        onclick="Historial.eliminar(${index})">
+
+        🗑 Eliminar
+
+    </button>
+
+</td>
 
                             </tr>
 
@@ -195,6 +203,22 @@ const Historial = {
         document.body.appendChild(modal);
 
     },
+
+    eliminar(index){
+
+    if(!confirm("¿Deseas eliminar esta venta?")){
+        return;
+    }
+
+    const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
+
+    ventas.splice(index, 1);
+
+    localStorage.setItem("ventas", JSON.stringify(ventas));
+
+    this.render();
+
+},
 
     cerrarModal(){
 
