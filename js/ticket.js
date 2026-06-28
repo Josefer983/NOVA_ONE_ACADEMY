@@ -41,6 +41,11 @@ const Ticket = {
 
 <style>
 
+@page{
+    size: 58mm 100mm;
+    margin: 0;
+}
+
 *{
     margin:0;
     padding:0;
