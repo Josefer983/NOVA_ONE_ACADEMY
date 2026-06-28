@@ -2,6 +2,11 @@ const Ticket = {
 
     imprimirVenta(venta){
 
+        if(!venta){
+            alert("No se encontró la venta.");
+            return;
+        }
+
         const ventana = window.open("", "_blank", "width=350,height=700");
 
         let productos = "";
@@ -13,7 +18,7 @@ const Ticket = {
                     <td>${p.cantidad}</td>
                     <td>${p.nombre}</td>
                     <td style="text-align:right;">
-                        $${(p.precio*p.cantidad).toFixed(2)}
+                        $${(p.precio * p.cantidad).toFixed(2)}
                     </td>
                 </tr>
             `;
@@ -23,45 +28,50 @@ const Ticket = {
         ventana.document.write(`
 
 <!DOCTYPE html>
-
-<html>
+<html lang="es">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>Ticket</title>
+<title>Ticket de Venta</title>
 
 <style>
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
 
-    font-family:Arial,sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
     width:280px;
-
     margin:auto;
-
     padding:15px;
-
     font-size:13px;
+    color:#000;
 
 }
 
 h2{
 
     text-align:center;
-
     margin-bottom:5px;
+
+}
+
+.centro{
+
+    text-align:center;
 
 }
 
 hr{
 
     border:none;
-
     border-top:1px dashed #000;
-
     margin:10px 0;
 
 }
@@ -69,33 +79,28 @@ hr{
 table{
 
     width:100%;
-
     border-collapse:collapse;
 
 }
 
 td{
 
-    padding:3px 0;
+    padding:4px 0;
 
 }
 
 .total{
 
-    font-size:18px;
-
-    font-weight:bold;
-
     text-align:right;
+    font-size:18px;
+    font-weight:bold;
 
 }
 
 .footer{
 
-    text-align:center;
-
     margin-top:20px;
-
+    text-align:center;
     font-size:12px;
 
 }
@@ -108,15 +113,23 @@ td{
 
 <h2>NOVA POS</h2>
 
-<div style="text-align:center;">
+<div class="centro">
+
 Mi Negocio
+
+<br>
+
+Gracias por su compra
+
 </div>
 
 <hr>
 
-<b>Venta #${venta.folio}</b>
+<b>Folio:</b> #${venta.folio}
 
 <br>
+
+<b>Fecha:</b>
 
 ${venta.fecha}
 
@@ -136,29 +149,35 @@ TOTAL
 
 <br>
 
-$${venta.total.toFixed(2)}
+$${Number(venta.total).toFixed(2)}
 
 </div>
 
 <hr>
 
-Método:
+<b>Método:</b>
 
 ${venta.metodo}
+
+<hr>
 
 <div class="footer">
 
 ¡Gracias por su compra!
 
+<br>
+
+Powered by Nova POS
+
 </div>
 
 <script>
 
-window.onload=()=>{
+window.onload = () => {
 
     window.print();
 
-}
+};
 
 <\/script>
 
@@ -166,9 +185,25 @@ window.onload=()=>{
 
 </html>
 
-`);
+        `);
 
         ventana.document.close();
+
+    },
+
+    imprimirDesdeHistorial(index){
+
+        const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
+
+        if(index < 0 || index >= ventas.length){
+
+            alert("Venta no encontrada.");
+
+            return;
+
+        }
+
+        this.imprimirVenta(ventas[index]);
 
     }
 

@@ -178,9 +178,9 @@ const Historial = {
 
                 <div class="acciones">
 
-                   <button
+  <button
     class="btn btn-cobrar"
-    onclick="Ticket.imprimirVenta(venta)">
+    onclick="Ticket.imprimirVenta(window.ventaActual)">
 
     🖨 Imprimir
 
