@@ -89,54 +89,88 @@ const Historial = {
 
     },
 
-    ver(index){
+ ver(index){
 
-        const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
+    const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
 
-        const venta = ventas[index];
+    const venta = ventas[index];
 
-        let productos = "";
+    let productos = "";
 
-        venta.productos.forEach(p=>{
+    venta.productos.forEach(p=>{
 
-            productos += `
-                <li>
+        productos += `
+            <tr>
+                <td>${p.nombre}</td>
+                <td>${p.cantidad}</td>
+                <td>$${p.precio.toFixed(2)}</td>
+                <td>$${(p.precio*p.cantidad).toFixed(2)}</td>
+            </tr>
+        `;
 
-                    ${p.cantidad} × ${p.nombre}
+    });
 
-                    <strong>
+    const modal = document.createElement("div");
 
-                        $${(p.precio*p.cantidad).toFixed(2)}
+    modal.className = "nova-modal-exito";
 
-                    </strong>
+    modal.innerHTML = `
+        <div class="nova-modal-contenido">
 
-                </li>
-            `;
+            <h2>📜 Venta #${venta.folio}</h2>
 
-        });
+            <p><strong>Fecha:</strong> ${venta.fecha}</p>
 
-        alert(
+            <p><strong>Método:</strong> ${venta.metodo}</p>
 
-`VENTA #${venta.folio}
+            <br>
 
-Fecha:
-${venta.fecha}
+            <table style="width:100%;border-collapse:collapse;">
 
-Método:
-${venta.metodo}
+                <thead>
 
-----------------------
+                    <tr>
 
-${venta.productos.map(p=>`${p.cantidad} x ${p.nombre}`).join("\n")}
+                        <th>Producto</th>
+                        <th>Cant.</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
 
-----------------------
+                    </tr>
 
-TOTAL:
-$${venta.total.toFixed(2)}
-`
+                </thead>
 
-        );
+                <tbody>
 
-    }
+                    ${productos}
 
-};
+                </tbody>
+
+            </table>
+
+            <br>
+
+            <h3>Total: $${venta.total.toFixed(2)}</h3>
+
+            <div class="acciones">
+
+                <button class="btn btn-cobrar">
+                    🖨 Imprimir
+                </button>
+
+                <button
+                    class="btn btn-vaciar"
+                    onclick="this.closest('.nova-modal-exito').remove()">
+
+                    Cerrar
+
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+}
