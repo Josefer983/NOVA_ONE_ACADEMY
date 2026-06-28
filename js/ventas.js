@@ -236,7 +236,66 @@ confirmarCobro(){
 
     this.cerrarCobro();
 
-    alert("✅ Venta realizada correctamente.");
+    this.mostrarVentaCompletada(venta);
+
+},
+
+mostrarVentaCompletada(venta){
+
+    const anterior = document.querySelector(".nova-modal-exito");
+
+    if(anterior){
+        anterior.remove();
+    }
+
+    const modal = document.createElement("div");
+
+    modal.className = "nova-modal-exito";
+
+    modal.innerHTML = `
+        <div class="nova-modal-contenido">
+
+            <div class="icono">✅</div>
+
+            <h2>Venta completada</h2>
+
+            <p>La venta se registró correctamente.</p>
+
+            <div class="info">
+
+                <p><strong>Folio:</strong> #${venta.folio}</p>
+
+                <p><strong>Total:</strong> $${venta.total.toFixed(2)}</p>
+
+                <p><strong>Método:</strong> ${venta.metodo}</p>
+
+                <p><strong>Fecha:</strong> ${venta.fecha}</p>
+
+            </div>
+
+            <div class="acciones">
+
+                <button class="btn btn-cobrar"
+                    onclick="Ventas.cerrarModalVenta()">
+                    Nueva venta
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+},
+
+cerrarModalVenta(){
+
+    const modal = document.querySelector(".nova-modal-exito");
+
+    if(modal){
+        modal.remove();
+    }
 
 },
 
