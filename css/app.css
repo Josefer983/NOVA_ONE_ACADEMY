@@ -99,40 +99,69 @@ header{
 }
 
 /* ===========================
-   LOGO SIDEBAR
+   LOGO NOVA POS
    =========================== */
 
    .logo-sidebar{
 
-       display:flex;
+       display: flex;
+           justify-content: center;
+               align-items: center;
 
-           justify-content:center;
-
-               align-items:center;
-
-                   padding:20px 15px;
+                   padding: 20px 15px 10px;
 
                    }
 
-.logo-sidebar{
+                   .logo-sidebar img{
 
-        display:flex;
+                       display: block;
 
-            justify-content:center;
+                           width: 100%;
 
-                align-items:center;
+                               max-width: 180px;
 
-                    padding:15px 10px;
+                                   height: auto;
 
-                    }
+                                   }
 
-                    .logo-sidebar img{
+                                   /* Celulares */
 
-                        width:80%;
+                                   @media (max-width: 767px){
 
-                            max-width:150px;
+                                       .logo-sidebar{
 
-                                height:auto;
+                                               padding: 15px 10px 5px;
 
-                                }
-}
+                                                   }
+
+                                                       .logo-sidebar img{
+
+                                                               max-width: 140px;
+
+                                                                   }
+
+                                                                   }
+
+                                                                   /* Tablets */
+
+                                                                   @media (min-width:768px) and (max-width:1023px){
+
+                                                                       .logo-sidebar img{
+
+                                                                               max-width: 200px;
+
+                                                                                   }
+
+                                                                                   }
+
+                                                                                   /* Escritorio */
+
+                                                                                   @media (min-width:1024px){
+
+                                                                                       .logo-sidebar img{
+
+                                                                                               max-width: 180px;
+
+                                                                                                   }
+
+                                                                                                   }
