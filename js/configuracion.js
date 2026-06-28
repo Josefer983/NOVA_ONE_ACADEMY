@@ -125,31 +125,6 @@ Personaliza Nova POS para adaptarlo a tu negocio.
                         80 mm
 
                     </option>
- </select>
-
-<select id="cfgTipo">
-
-    <option value="tienda"
-        ${config.tipo=="tienda"?"selected":""}>
-        🛒 Tienda
-    </option>
-
-    <option value="cafeteria"
-        ${config.tipo=="cafeteria"?"selected":""}>
-        ☕ Cafetería
-    </option>
-
-    <option value="restaurante"
-        ${config.tipo=="restaurante"?"selected":""}>
-        🍽 Restaurante
-    </option>
-
-    <option value="outlet"
-        ${config.tipo=="outlet"?"selected":""}>
-        🏷 Outlet
-    </option>
-
-</select>
 
             </div>
 
