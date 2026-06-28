@@ -9,11 +9,9 @@ const Historial = {
 
         const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
 
-        let html = "";
-
         if (ventas.length === 0) {
 
-            html = `
+            contenido.innerHTML = `
                 <div class="card">
                     <h2>📜 Historial de Ventas</h2>
                     <br>
@@ -21,156 +19,193 @@ const Historial = {
                 </div>
             `;
 
-        } else {
+            return;
+        }
 
-            html = `
-                <div class="card">
+        contenido.innerHTML = `
+            <div class="card">
 
-                    <h2>📜 Historial de Ventas</h2>
+                <h2>📜 Historial de Ventas</h2>
 
-                    <br>
+                <br>
 
-                    <table class="tabla-historial">
+                <table class="tabla-historial">
 
-                        <thead>
+                    <thead>
+
+                        <tr>
+
+                            <th>Folio</th>
+                            <th>Fecha</th>
+                            <th>Método</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        ${ventas.map((venta,index)=>`
 
                             <tr>
 
-                                <th>Folio</th>
-                                <th>Fecha</th>
-                                <th>Método</th>
-                                <th>Total</th>
-                                <th></th>
+                                <td>#${venta.folio}</td>
+
+                                <td>${venta.fecha}</td>
+
+                                <td>${venta.metodo}</td>
+
+                                <td>$${Number(venta.total).toFixed(2)}</td>
+
+                                <td>
+
+                                    <button
+                                        class="btn btn-cobrar"
+                                        onclick="Historial.ver(${index})">
+
+                                        👁 Ver
+
+                                    </button>
+
+                                </td>
 
                             </tr>
 
-                        </thead>
+                        `).join("")}
 
-                        <tbody>
+                    </tbody>
 
-                            ${ventas.map((venta,index)=>`
+                </table>
 
-                                <tr>
-
-                                    <td>#${venta.folio}</td>
-
-                                    <td>${venta.fecha}</td>
-
-                                    <td>${venta.metodo}</td>
-
-                                    <td>$${venta.total.toFixed(2)}</td>
-
-                                    <td>
-
-                                        <button
-                                            class="btn btn-cobrar"
-                                            onclick="Historial.ver(${index})">
-
-                                            Ver
-
-                                        </button>
-
-                                    </td>
-
-                                </tr>
-
-                            `).join("")}
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-            `;
-
-        }
-
-        contenido.innerHTML = html;
+            </div>
+        `;
 
     },
 
- ver(index){
+    ver(index){
 
-    const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
+        const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
 
-    const venta = ventas[index];
+        const venta = ventas[index];
 
-    let productos = "";
+        let productos = "";
 
-    venta.productos.forEach(p=>{
+        venta.productos.forEach(p=>{
 
-        productos += `
-            <tr>
-                <td>${p.nombre}</td>
-                <td>${p.cantidad}</td>
-                <td>$${p.precio.toFixed(2)}</td>
-                <td>$${(p.precio*p.cantidad).toFixed(2)}</td>
-            </tr>
-        `;
+            productos += `
+                <tr>
 
-    });
+                    <td>${p.nombre}</td>
 
-    const modal = document.createElement("div");
+                    <td>${p.cantidad}</td>
 
-    modal.className = "nova-modal-exito";
+                    <td>$${Number(p.precio).toFixed(2)}</td>
 
-    modal.innerHTML = `
-        <div class="nova-modal-contenido">
+                    <td>$${(p.precio*p.cantidad).toFixed(2)}</td>
 
-            <h2>📜 Venta #${venta.folio}</h2>
+                </tr>
+            `;
 
-            <p><strong>Fecha:</strong> ${venta.fecha}</p>
+        });
 
-            <p><strong>Método:</strong> ${venta.metodo}</p>
+        const anterior = document.querySelector(".nova-modal-exito");
 
-            <br>
+        if(anterior){
 
-            <table style="width:100%;border-collapse:collapse;">
+            anterior.remove();
 
-                <thead>
+        }
 
-                    <tr>
+        const modal = document.createElement("div");
 
-                        <th>Producto</th>
-                        <th>Cant.</th>
-                        <th>Precio</th>
-                        <th>Subtotal</th>
+        modal.className = "nova-modal-exito";
 
-                    </tr>
+        modal.innerHTML = `
 
-                </thead>
+            <div class="nova-modal-contenido">
 
-                <tbody>
+                <div class="icono">📜</div>
 
-                    ${productos}
+                <h2>Venta #${venta.folio}</h2>
 
-                </tbody>
+                <p><strong>Fecha:</strong> ${venta.fecha}</p>
 
-            </table>
+                <p><strong>Método:</strong> ${venta.metodo}</p>
 
-            <br>
+                <br>
 
-            <h3>Total: $${venta.total.toFixed(2)}</h3>
+                <table style="width:100%;border-collapse:collapse;">
 
-            <div class="acciones">
+                    <thead>
 
-                <button class="btn btn-cobrar">
-                    🖨 Imprimir
-                </button>
+                        <tr>
 
-                <button
-                    class="btn btn-vaciar"
-                    onclick="this.closest('.nova-modal-exito').remove()">
+                            <th>Producto</th>
 
-                    Cerrar
+                            <th>Cant.</th>
 
-                </button>
+                            <th>Precio</th>
+
+                            <th>Subtotal</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        ${productos}
+
+                    </tbody>
+
+                </table>
+
+                <br>
+
+                <h3>Total: $${Number(venta.total).toFixed(2)}</h3>
+
+                <br>
+
+                <div class="acciones">
+
+                    <button
+                        class="btn btn-cobrar"
+                        onclick="alert('La impresión del ticket llegará en el siguiente sprint.')">
+
+                        🖨 Imprimir
+
+                    </button>
+
+                    <button
+                        class="btn btn-vaciar"
+                        onclick="Historial.cerrarModal()">
+
+                        Cerrar
+
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
-    `;
+        `;
 
-    document.body.appendChild(modal);
+        document.body.appendChild(modal);
 
-}
+    },
+
+    cerrarModal(){
+
+        const modal = document.querySelector(".nova-modal-exito");
+
+        if(modal){
+
+            modal.remove();
+
+        }
+
+    }
+
+};
