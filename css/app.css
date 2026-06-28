@@ -114,14 +114,25 @@ header{
 
                    }
 
-                   .logo-sidebar img{
+.logo-sidebar{
 
-                       width:100%;
+        display:flex;
 
-                           max-width:190px;
+            justify-content:center;
 
-                               height:auto;
+                align-items:center;
 
-                                   object-fit:contain;
+                    padding:15px 10px;
 
-                                   }
+                    }
+
+                    .logo-sidebar img{
+
+                        width:80%;
+
+                            max-width:150px;
+
+                                height:auto;
+
+                                }
+}
