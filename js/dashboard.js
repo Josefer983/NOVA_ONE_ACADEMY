@@ -1,65 +1,66 @@
-function obtener(clave){
+const Dashboard = {
 
-    return JSON.parse(localStorage.getItem(clave)) || [];
+        render() {
 
-}
+                const titulo = document.getElementById("titulo");
+                        const contenido = document.getElementById("contenido");
 
-function actualizarDashboard(){
+                                titulo.textContent = "Dashboard";
 
-    const productos = obtener("productos").length;
+                                        const productos = JSON.parse(localStorage.getItem("productos") || "[]");
 
-    const clientes = obtener("clientes").length;
+                                                const clientes = JSON.parse(localStorage.getItem("clientes") || "[]");
 
-    const compras = obtener("compras").length;
+                                                        const compras = JSON.parse(localStorage.getItem("compras") || "[]");
 
-    const ventas = obtener("ventas") || [];
+                                                                const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
 
-    const totalVentas = ventas.reduce((total,venta)=>{
+                                                                        const totalVentas = ventas.reduce((total, venta) => {
 
-        return total + Number(venta.total || 0);
+                                                                                    return total + Number(venta.total || 0);
 
-    },0);
+                                                                                            }, 0);
 
-    const ids={
+                                                                                                    contenido.innerHTML = `
 
-        productos:"productos",
+                                                                                                                <div class="card-grid">
 
-        clientes:"clientes",
+                                                                                                                                <div class="card">
 
-        compras:"compras",
+                                                                                                                                                    <h3>📦 Productos</h3>
 
-        ventas:"ventas"
+                                                                                                                                                                        <h2>${productos.length}</h2>
 
-    };
+                                                                                                                                                                                        </div>
 
-    Object.keys(ids).forEach(id=>{
+                                                                                                                                                                                                        <div class="card">
 
-        const elemento=document.getElementById(id);
+                                                                                                                                                                                                                            <h3>👥 Clientes</h3>
 
-        if(!elemento) return;
+                                                                                                                                                                                                                                                <h2>${clientes.length}</h2>
 
-        switch(id){
+                                                                                                                                                                                                                                                                </div>
 
-            case "productos":
-                elemento.textContent=productos;
-                break;
+                                                                                                                                                                                                                                                                                <div class="card">
 
-            case "clientes":
-                elemento.textContent=clientes;
-                break;
+                                                                                                                                                                                                                                                                                                    <h3>💰 Ventas</h3>
 
-            case "compras":
-                elemento.textContent=compras;
-                break;
+                                                                                                                                                                                                                                                                                                                        <h2>$${totalVentas.toFixed(2)}</h2>
 
-            case "ventas":
-                elemento.textContent="$"+totalVentas.toFixed(2);
-                break;
+                                                                                                                                                                                                                                                                                                                                        </div>
 
-        }
+                                                                                                                                                                                                                                                                                                                                                        <div class="card">
 
-    });
+                                                                                                                                                                                                                                                                                                                                                                            <h3>🛒 Compras</h3>
 
-}
+                                                                                                                                                                                                                                                                                                                                                                                                <h2>${compras.length}</h2>
 
-document.addEventListener("DOMContentLoaded",actualizarDashboard);
+                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+
+                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                    `;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                        };

@@ -7,36 +7,11 @@ const App = {
 
         switch(modulo){
 
-            case "dashboard":
+case "dashboard":
 
-                titulo.textContent="Dashboard";
+        Dashboard.render();
 
-                contenido.innerHTML=`
-                <div class="card-grid">
-
-                    <div class="card">
-                        <h3>Productos</h3>
-                        <h2>${JSON.parse(localStorage.getItem("productos")||"[]").length}</h2>
-                    </div>
-
-                    <div class="card">
-                        <h3>Clientes</h3>
-                        <h2>${JSON.parse(localStorage.getItem("clientes")||"[]").length}</h2>
-                    </div>
-
-                    <div class="card">
-                        <h3>Ventas</h3>
-                        <h2>$0.00</h2>
-                    </div>
-
-                    <div class="card">
-                        <h3>Compras</h3>
-                        <h2>${JSON.parse(localStorage.getItem("compras")||"[]").length}</h2>
-                    </div>
-
-                </div>`;
-            break;
-
+        break;
             case "productos":
 
                 titulo.textContent="Productos";
