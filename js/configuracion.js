@@ -126,7 +126,6 @@ Personaliza Nova POS para adaptarlo a tu negocio.
 
                     </option>
 
-            </div>
 
             <br><br>
 
