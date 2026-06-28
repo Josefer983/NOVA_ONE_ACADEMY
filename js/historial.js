@@ -178,13 +178,13 @@ const Historial = {
 
                 <div class="acciones">
 
-                    <button
-                        class="btn btn-cobrar"
-                        onclick="alert('La impresión del ticket llegará en el siguiente sprint.')">
+                   <button
+    class="btn btn-cobrar"
+    onclick="Ticket.imprimirVenta(venta)">
 
-                        🖨 Imprimir
+    🖨 Imprimir
 
-                    </button>
+</button>
 
                     <button
                         class="btn btn-vaciar"
