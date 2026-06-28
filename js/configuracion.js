@@ -72,6 +72,34 @@ const Configuracion = {
 
             <br>
 
+<div class="form-group">
+
+    <label>Tipo de negocio</label>
+
+    <select id="cfgTipo">
+
+        <option value="tienda">
+            🛒 Tienda
+        </option>
+
+        <option value="cafeteria">
+            ☕ Cafetería
+        </option>
+
+        <option value="restaurante">
+            🍽 Restaurante
+        </option>
+
+        <option value="outlet">
+            🏷 Outlet
+        </option>
+
+    </select>
+
+</div>
+
+<br>
+
             <div class="form-group">
 
                 <label>Tamaño del papel</label>
@@ -91,8 +119,31 @@ const Configuracion = {
                         80 mm
 
                     </option>
+ </select>
 
-                </select>
+<select id="cfgTipo">
+
+    <option value="tienda"
+        ${config.tipo=="tienda"?"selected":""}>
+        🛒 Tienda
+    </option>
+
+    <option value="cafeteria"
+        ${config.tipo=="cafeteria"?"selected":""}>
+        ☕ Cafetería
+    </option>
+
+    <option value="restaurante"
+        ${config.tipo=="restaurante"?"selected":""}>
+        🍽 Restaurante
+    </option>
+
+    <option value="outlet"
+        ${config.tipo=="outlet"?"selected":""}>
+        🏷 Outlet
+    </option>
+
+</select>
 
             </div>
 
@@ -128,8 +179,11 @@ const Configuracion = {
 
             autoPrint: document.getElementById("cfgAutoPrint").checked,
 
+tipo: document.getElementById("cfgTipo").value,
+
             papel: document.getElementById("cfgPapel").value
 
+            
         };
 
         localStorage.setItem(
