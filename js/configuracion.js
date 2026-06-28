@@ -125,7 +125,10 @@ Personaliza Nova POS para adaptarlo a tu negocio.
                         80 mm
 
                     </option>
+ </select>
 
+
+            </div>
 
             <br><br>
 
