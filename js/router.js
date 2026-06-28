@@ -74,9 +74,8 @@ break;
             break;
 
             case "configuracion":
-                titulo.textContent="Configuración";
-                contenido.innerHTML="<h2>🚧 Próximamente...</h2>";
-            break;
+    Configuracion.render();
+break;
 
         }
 
