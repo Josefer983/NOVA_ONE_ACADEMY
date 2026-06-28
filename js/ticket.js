@@ -54,11 +54,16 @@ const Ticket = {
 
 body{
 
-    font-family:Arial,Helvetica,sans-serif;
-    width:280px;
-    margin:auto;
-    padding:15px;
-    font-size:13px;
+    width:58mm;
+
+    margin:0;
+
+    padding:4mm;
+
+    font-family:monospace;
+
+    font-size:12px;
+
     color:#000;
 
 }
