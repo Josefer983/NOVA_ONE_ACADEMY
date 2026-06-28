@@ -96,9 +96,12 @@ const Historial = {
 
         const ventas = JSON.parse(localStorage.getItem("ventas") || "[]");
 
-        const venta = ventas[index];
+const venta = ventas[index];
 
-        let productos = "";
+// Guardamos la venta actual para imprimirla
+window.ventaActual = venta;
+
+let productos = "";
 
         venta.productos.forEach(p=>{
 
@@ -178,7 +181,7 @@ const Historial = {
 
                 <div class="acciones">
 
-  <button
+<button
     class="btn btn-cobrar"
     onclick="Ticket.imprimirVenta(window.ventaActual)">
 

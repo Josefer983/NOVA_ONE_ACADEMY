@@ -2,9 +2,12 @@ const Ticket = {
 
     imprimirVenta(venta){
 
-        if(!venta){
-            alert("No se encontró la venta.");
-            return;
+    // Si no recibe una venta, usa la última abierta en el historial
+    venta = venta || window.ventaActual;
+
+    if(!venta){
+        alert("No se encontró la venta.");
+        return;
         }
 
         const ventana = window.open("", "_blank", "width=350,height=700");
