@@ -13,7 +13,13 @@ const Configuracion = {
 
         <div class="card">
 
-            <h2>⚙ Configuración del Negocio</h2>
+           <h2>⚙ Configuración General</h2>
+
+<p style="color:#666;margin-top:8px;margin-bottom:25px;">
+
+Personaliza Nova POS para adaptarlo a tu negocio.
+
+</p>
 
             <br>
 
