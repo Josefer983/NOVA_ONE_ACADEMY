@@ -11,7 +11,7 @@ const Configuracion = {
 
         contenido.innerHTML = `
 
-        <div class="card">
+        <div class="card card-configuracion">
 
            <h2>⚙ Configuración General</h2>
 
