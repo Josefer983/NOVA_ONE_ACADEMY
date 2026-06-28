@@ -54,6 +54,10 @@ const App = {
             Ventas.render();
             break;
 
+case "historial":
+    Historial.render();
+break;
+
             case "clientes":
                 titulo.textContent="Clientes";
                 contenido.innerHTML="<h2>🚧 Próximamente...</h2>";
