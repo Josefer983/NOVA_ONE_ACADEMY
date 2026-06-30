@@ -1,0 +1,158 @@
+/*=========================================
+    NOVA ONE BUSINESS
+    LAYOUT v1.0
+=========================================*/
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    background:#F5F7FB;
+
+    overflow:hidden;
+
+}
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+#app{
+
+    display:flex;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+}
+
+/*=========================================
+        CONTENIDO
+=========================================*/
+
+#main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    background:#F5F7FB;
+
+}
+
+/*=========================================
+        AREA PRINCIPAL
+=========================================*/
+
+#contenido{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:30px;
+
+}
+
+/*=========================================
+        SCROLL
+=========================================*/
+
+#contenido::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+#contenido::-webkit-scrollbar-thumb{
+
+    background:#D4D9E3;
+
+    border-radius:20px;
+
+}
+
+#contenido::-webkit-scrollbar-thumb:hover{
+
+    background:#B7C0CF;
+
+}
+
+#contenido::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/*=========================================
+        ANIMACION
+=========================================*/
+
+#contenido{
+
+    animation:fade .35s;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================================
+        RESPONSIVE
+=========================================*/
+
+@media(max-width:992px){
+
+#contenido{
+
+padding:20px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+#main{
+
+width:100%;
+
+}
+
+#contenido{
+
+padding:16px;
+
+}
+
+}

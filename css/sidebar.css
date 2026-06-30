@@ -1,0 +1,208 @@
+/* ==========================================
+   NOVA ONE BUSINESS
+   Sidebar v1.0
+========================================== */
+
+#sidebar{
+
+    width:250px;
+    min-width:250px;
+    height:100vh;
+
+    background:#111827;
+
+    color:#fff;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:22px 18px;
+
+    border-right:1px solid rgba(255,255,255,.05);
+
+    position:sticky;
+    top:0;
+
+    overflow-y:auto;
+
+}
+
+/* Logo */
+
+.logo-sidebar{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:28px;
+
+}
+
+/* NO CAMBIAR */
+.logo-sidebar img{
+
+    width:180px;
+    height:auto;
+    display:block;
+
+}
+
+/* Menú */
+
+#sidebar nav{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+/* Categorías */
+
+.menu-title{
+
+    margin-top:18px;
+    margin-bottom:10px;
+
+    padding:0 14px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.6px;
+
+    color:#8b95a7;
+
+}
+
+/* Botones */
+
+#sidebar a{
+
+    display:flex;
+    align-items:center;
+
+    gap:14px;
+
+    height:48px;
+
+    padding:0 16px;
+
+    margin-bottom:6px;
+
+    border-radius:14px;
+
+    color:#d8dee9;
+
+    text-decoration:none;
+
+    transition:.25s ease;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+
+/* Iconos */
+
+#sidebar a i{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:17px;
+
+}
+
+/* Hover */
+
+#sidebar a:hover{
+
+    background:#1f2937;
+
+    color:#fff;
+
+    transform:translateX(4px);
+
+}
+
+/* Activo */
+
+#sidebar a.active{
+
+    background:linear-gradient(
+        90deg,
+        #6d5df6,
+        #8b7cff
+    );
+
+    color:#fff;
+
+    box-shadow:
+    0 10px 20px rgba(109,93,246,.25);
+
+}
+
+/* Scroll */
+
+#sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+#sidebar::-webkit-scrollbar-thumb{
+
+    background:#2d3748;
+
+    border-radius:20px;
+
+}
+
+#sidebar::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/* Tablet */
+
+@media(max-width:992px){
+
+    #sidebar{
+
+        width:220px;
+        min-width:220px;
+
+    }
+
+}
+
+/* Celular */
+
+@media(max-width:768px){
+
+    #sidebar{
+
+        position:fixed;
+
+        left:-260px;
+
+        z-index:999;
+
+        transition:.35s;
+
+    }
+
+    #sidebar.open{
+
+        left:0;
+
+    }
+
+}

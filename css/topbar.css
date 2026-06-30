@@ -1,0 +1,172 @@
+/* ==========================================
+   NOVA ONE BUSINESS
+   TOPBAR v1.0
+========================================== */
+
+.topbar{
+
+    height:78px;
+
+    background:#ffffff;
+
+    border-bottom:1px solid #eceff5;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 32px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    box-shadow:0 4px 20px rgba(15,23,42,.04);
+
+}
+
+/* Lado izquierdo */
+
+.topbar-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.topbar h1{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#111827;
+
+    margin:0;
+
+}
+
+.topbar p{
+
+    margin-top:4px;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+}
+
+/* Lado derecho */
+
+.topbar-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+/* Botones redondos */
+
+.icon-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f3f4f6;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#374151;
+
+    font-size:18px;
+
+}
+
+.icon-btn:hover{
+
+    background:#6D5DF6;
+
+    color:#fff;
+
+}
+
+/* Usuario */
+
+.profile-btn{
+
+    height:44px;
+
+    padding:0 18px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#111827;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.profile-btn:hover{
+
+    background:#6D5DF6;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .topbar{
+
+        padding:0 18px;
+
+    }
+
+    .topbar h1{
+
+        font-size:20px;
+
+    }
+
+    .profile-btn{
+
+        padding:0 14px;
+
+    }
+
+}
